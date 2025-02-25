@@ -34,7 +34,7 @@ public class Main {
          File blobFile = new File("./.git/objects"+ dirHash+"/"+fileHash);
 
          try {
-           String blob = new BufferedReader(new InputStreamReader(new FileInputStream(blobFile))).readLine();
+           String blob = new BufferedReader(new InputStreamReader(new InflaterInputStream(new FileInputStream(blobFile)))).readLine();
            String content = blob.substring(blob.indexOf("\0")+1);
            System.out.println(content);
 
@@ -42,9 +42,6 @@ public class Main {
            throw new RuntimeException(e);
          }
        }
-
-
-
        default -> System.out.println("Unknown command: " + command);
      }
   }
